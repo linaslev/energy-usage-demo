@@ -1,0 +1,52 @@
+<!-- Display the countdown timer in an element -->
+<p id="demo"></p>
+
+<style>
+    #demo {
+        width: 100vw;
+        height: 100vh;
+        font-size: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<script>
+  var timer = runTimer();
+
+  window.addEventListener('blur', (e) => {
+    e.preventDefault();
+    clearInterval(timer)
+  });
+
+  window.addEventListener('focus', (e) => {
+    e.preventDefault();
+
+    timer = runTimer();
+  });
+
+  function runTimer() {
+    return setInterval(changeTimer, 1000);
+  }
+
+  function changeTimer() {
+    // Get today's date and time
+    var now = new Date().getTime()
+    var countDownDate = new Date('July 5, 2021 15:37:25').getTime();
+
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now
+
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24))
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000)
+
+    // Display the result in the element with id="demo"
+    document.getElementById('demo').innerHTML = days + 'd ' + hours + 'h '
+      + minutes + 'm ' + seconds + 's '
+  }
+
+</script>
